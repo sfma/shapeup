@@ -1,0 +1,210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>tutorial &mdash; shapeup 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="shapeup 1.0 documentation" href="index.html" />
+    <link rel="prev" title="installation" href="installation.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="tutorial">
+<h1>tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h1>
+<p>sastbx.shapeup can be used for low-resolution shape determination given small angle scattering(SAXS) data. A search typically takes about one minute.</p>
+<p>Type <code class="docutils literal"><span class="pre">sastbx.shapeup</span></code> in the command line, a brief usage will be given:</p>
+<div class="highlight-python"><div class="highlight"><pre>Usage:
+
+   sastbx.shapeup &lt;target=target.iq&gt; [rmax=rmax nmax=nmax scan=True*/False buildmap=True*/False pdb=pdbfile path=database_path]
+
+   The intensity profile is the only required input file  (in theory)
+   Optional control parameters:
+
+     rmax     : radius of the molecule (default: guessed from Rg)
+     nmax     : maximum order of the zernike polynomial expansion (&lt;=20 for precomputed database; 10 is the default)
+     qmax     : maximum q value, beyond which the intensity profile will not be considered (default 0.20)
+     path     : path to the database (this MUST be correct to execute the searching)
+     buildmap : build electron density map in xplor format, all the map will be aligned
+     pdb      : any pdb model to be compared, and the maps will be aligned to the first pdb file
+     prefix   : the output prefix
+
+
+query {
+  target = None
+    .help = &quot;the experimental intensity profile&quot;
+  nmax = 10
+    .help = &quot;maximum order of zernike polynomial: FIXED for the existing&quot;
+            &quot;database&quot;
+  pdb_files = None
+    .help = &quot;If provided, align this structure to the models&quot;
+  qmax = 0.2
+    .help = &quot;maximum q value where data beyond are disgarded&quot;
+  q_level = 0.01
+    .help = &quot;ratio between I_stop and I_max&quot;
+  q_background = None
+    .help = &quot;the intensity beyond q-background is treated as background&quot;
+  rmax = None
+    .help = &quot;estimated rmax of the molecule&quot;
+  scan = True
+    .help = &quot;scan for different rmax?&quot;
+  prefix = &quot;query&quot;
+    .help = &quot;the output prefix&quot;
+  dbpath = None
+    .help = &quot;the directory of database file, i.e., the pickle files&quot;
+  db_choice = *pisa piqsi allpdb user
+    .help = &quot;Data base name&quot;
+  db_user_prefix = &quot;mydb&quot;
+    .help = &quot;the prefix of database filename&quot;
+  buildmap = True
+    .help = &quot;align the top models and generate xplor files&quot;
+  calc_cc = True
+    .help = &quot;calculate Correlation Coefficient or just Coefficient distance&quot;
+  smear = True
+    .help = &quot;smear the calculated data to remove the spikes (fits better to&quot;
+            &quot;expt data)&quot;
+  weight = *i s
+    .help = &quot;the weights to be used in chi-score calculation&quot;
+  delta_q = None
+    .help = &quot;linear smearing distance, default is set to q_step*0.1&quot;
+  ntop = 10
+    .help = &quot;number of top hits returned per search&quot;
+  fraction = 0.9
+    .help = &quot;fraction in zernike moments calculation on 1-D axis: This is&quot;
+            &quot;FIXED, unless the database is changed&quot;
+  scale_power = 4
+    .help = &quot;Parameter controlling the scale factor calculation. Default&quot;
+            &quot;should be good.&quot;
+}
+</pre></div>
+</div>
+<p>Further explanation about usage:</p>
+<p>In the current version, you need to specify the input intensity file and an estimated radius for a query. So the minimal command is in this format:</p>
+<p><code class="docutils literal"><span class="pre">sastbx.shapeup</span> <span class="pre">target=input_file</span> <span class="pre">rmax=radius</span></code></p>
+<p>Other parameters are optional.</p>
+<p>Here gives an example to illustrate the usage.
+The sastbx_path/source/sastbx/examples folder contains some iq profiles and the corresponding pdb data. Change to that directory, then type
+<code class="docutils literal"><span class="pre">sastbx.shapeup</span> <span class="pre">target=2e2g_znk.iq</span> <span class="pre">rmax=50</span></code></p>
+<p>Radius and shape information are provided in the output.</p>
+<p>In this example, you can see from the output that:</p>
+<div class="line-block">
+<div class="line">Best rmax found       :   74.15 A</div>
+</div>
+<p>With no ntop specified, the output gives ten most similar models by default, and they are ranked by similarity to the target.</p>
+<div class="highlight-python"><div class="highlight"><pre>Rank PDB_code cc (to the given model or the first model):
+1 2ZCT
+ 2   2H66  0.956
+ 3   1QMV  0.987
+ 4   1UUL  0.985
+ 5   2PN8  0.985
+ 6   2FB5  0.856
+ 7   1E2Y  0.958
+ 8   1J93  0.945
+ 9   1U3D  0.916
+10   2OB9  0.947
+</pre></div>
+</div>
+<p>Since no pdb files here, column three lists cc to the first model, pdb_code 2ZCT in this example.</p>
+<p>One can provide a pdb file and compare the returned models with it.</p>
+<p><code class="docutils literal"><span class="pre">sastbx.shapeup</span> <span class="pre">target=2e2g_znk.iq</span> <span class="pre">rmax=50</span> <span class="pre">pdb=2e2g.pdb</span></code></p>
+<p>Now the output shows cc to the model given by the pdb file.</p>
+<div class="highlight-python"><div class="highlight"><pre>Rank PDB_code cc (to the given model or the first model):
+ 1   2ZCT  0.997
+ 2   2H66  0.955
+ 3   1QMV  0.983
+ 4   1UUL  0.980
+ 5   2PN8  0.981
+ 6   2FB5  0.858
+ 7   1E2Y  0.956
+ 8   1J93  0.946
+ 9   1U3D  0.921
+10   2OB9  0.948
+</pre></div>
+</div>
+<p>Similarity of the returned models to the target is implied by the high values of cc.</p>
+<div class="highlight-python"><div class="highlight"><pre>Rmax: estimated vs PDB 74.1502812526 72.9867447533
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="installation.html" title="previous chapter">installation</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/tutorial.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2015, sfma.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
+      
+      |
+      <a href="_sources/tutorial.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
