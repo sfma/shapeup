@@ -80,6 +80,7 @@ In the current version, you need to specify the input intensity file and an esti
 Other parameters are optional.  
 
 Here gives an example to illustrate the usage.  
+
 The sastbx_path/source/sastbx/examples folder contains some iq profiles and the corresponding pdb data. Change to that directory, then type  
 ``sastbx.shapeup target=2e2g_znk.iq rmax=50``  
 
@@ -87,7 +88,9 @@ Radius and shape information are provided in the output.
 
 In this example, you can see from the output that:
 
-| Best rmax found       :   74.15 A  
+::
+
+  Best rmax found       :   74.15 A  
 
 With no ntop specified, the output gives ten most similar models by default, and they are ranked by similarity to the target.  
 
@@ -107,6 +110,12 @@ With no ntop specified, the output gives ten most similar models by default, and
   10   2OB9  0.947
 
 Since no pdb files here, column three lists cc to the first model, pdb_code 2ZCT in this example.
+
+A ccp4 file is generated for each returned model. And the models are averaged to ave_1.ccp4. Here gives the images of the top 3 models.
+
+.. figure:: image_ave_1.png
+   :scale: 50%
+   ave_1.ccp4
 
 One can provide a pdb file and compare the returned models with it.
 

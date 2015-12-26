@@ -199,13 +199,13 @@ query {
 <p>In the current version, you need to specify the input intensity file and an estimated radius for a query. So the minimal command is in this format:</p>
 <p><code class="docutils literal"><span class="pre">sastbx.shapeup</span> <span class="pre">target=input_file</span> <span class="pre">rmax=radius</span></code></p>
 <p>Other parameters are optional.</p>
-<p>Here gives an example to illustrate the usage.
-The sastbx_path/source/sastbx/examples folder contains some iq profiles and the corresponding pdb data. Change to that directory, then type
+<p>Here gives an example to illustrate the usage.</p>
+<p>The sastbx_path/source/sastbx/examples folder contains some iq profiles and the corresponding pdb data. Change to that directory, then type
 <code class="docutils literal"><span class="pre">sastbx.shapeup</span> <span class="pre">target=2e2g_znk.iq</span> <span class="pre">rmax=50</span></code></p>
 <p>Radius and shape information are provided in the output.</p>
 <p>In this example, you can see from the output that:</p>
-<div class="line-block">
-<div class="line">Best rmax found       :   74.15 A</div>
+<div class="highlight-python"><div class="highlight"><pre>Best rmax found       :   74.15 A
+</pre></div>
 </div>
 <p>With no ntop specified, the output gives ten most similar models by default, and they are ranked by similarity to the target.</p>
 <div class="highlight-python"><div class="highlight"><pre>Rank PDB_code cc (to the given model or the first model):
@@ -222,6 +222,7 @@ The sastbx_path/source/sastbx/examples folder contains some iq profiles and the 
 </pre></div>
 </div>
 <p>Since no pdb files here, column three lists cc to the first model, pdb_code 2ZCT in this example.</p>
+<p>A ccp4 file is generated for each returned model. And the models are averaged to ave_1.ccp4. Here gives the images of the top 3 models.</p>
 <p>One can provide a pdb file and compare the returned models with it.</p>
 <p><code class="docutils literal"><span class="pre">sastbx.shapeup</span> <span class="pre">target=2e2g_znk.iq</span> <span class="pre">rmax=50</span> <span class="pre">pdb=2e2g.pdb</span></code></p>
 <p>Now the output shows cc to the model given by the pdb file.</p>
