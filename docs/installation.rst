@@ -26,4 +26,4 @@ Then,
 
 Add one line in your .bash_profile.
 
-``source setpaths_all.sh``
+``source sastbx_path/build/setpaths_all.sh``
