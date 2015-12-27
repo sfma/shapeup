@@ -222,7 +222,10 @@ query {
 </pre></div>
 </div>
 <p>Since no pdb files here, column three lists cc to the first model, pdb_code 2ZCT in this example.</p>
-<p>A ccp4 file is generated for each returned model. And the models are averaged to ave_1.ccp4. Here gives the images of the top 3 models.</p>
+<p>A ccp4 file is generated for each returned model. And the models are averaged to ave_1.ccp4. You can use chimera to view the models. Here gives the images of the top 3 models, from left to right.</p>
+<a class="reference internal image-reference" href="_images/image_m1.png"><img alt="_images/image_m1.png" src="_images/image_m1.png" style="width: 30%;" /></a>
+<a class="reference internal image-reference" href="_images/image_m2.png"><img alt="_images/image_m2.png" src="_images/image_m2.png" style="width: 30%;" /></a>
+<a class="reference internal image-reference" href="_images/image_m3.png"><img alt="_images/image_m3.png" src="_images/image_m3.png" style="width: 30%;" /></a>
 <p>One can provide a pdb file and compare the returned models with it.</p>
 <p><code class="docutils literal"><span class="pre">sastbx.shapeup</span> <span class="pre">target=2e2g_znk.iq</span> <span class="pre">rmax=50</span> <span class="pre">pdb=2e2g.pdb</span></code></p>
 <p>Now the output shows cc to the model given by the pdb file.</p>
@@ -240,6 +243,11 @@ query {
 </pre></div>
 </div>
 <p>Similarity of the returned models to the target is implied by the high values of cc.</p>
+<p>Compare the average_model(ave_1.ccp4, left) to the pdb file provided (2e2g.pdb, right):</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="_images/image_ave_1.png"><img alt="_images/image_ave_1.png" src="_images/image_ave_1.png" style="width: 30%;" /></a>
+<a class="reference internal image-reference" href="_images/image_2e2gpdb.png"><img alt="_images/image_2e2gpdb.png" src="_images/image_2e2gpdb.png" style="width: 30%;" /></a>
+</div></blockquote>
 <div class="highlight-python"><div class="highlight"><pre>Rmax: estimated vs PDB 74.1502812526 72.9867447533
 </pre></div>
 </div>

@@ -111,11 +111,14 @@ With no ntop specified, the output gives ten most similar models by default, and
 
 Since no pdb files here, column three lists cc to the first model, pdb_code 2ZCT in this example.
 
-A ccp4 file is generated for each returned model. And the models are averaged to ave_1.ccp4. Here gives the images of the top 3 models.
+A ccp4 file is generated for each returned model. And the models are averaged to ave_1.ccp4. You can use chimera to view the models. Here gives the images of the top 3 models, from left to right.
 
-.. figure:: image_ave_1.png
-   :scale: 50%
-   ave_1.ccp4
+.. image:: ./images/image_m1.png 
+   :width: 30%
+.. image:: ./images/image_m2.png 
+   :width: 30%
+.. image:: ./images/image_m3.png 
+   :width: 30%
 
 One can provide a pdb file and compare the returned models with it.
 
@@ -138,6 +141,14 @@ Now the output shows cc to the model given by the pdb file.
   10   2OB9  0.948
 
 Similarity of the returned models to the target is implied by the high values of cc.
+
+Compare the average_model(ave_1.ccp4, left) to the pdb file provided (2e2g.pdb, right):
+
+  .. image:: ./images/image_ave_1.png
+     :width: 30%
+  .. image:: ./images/image_2e2gpdb.png
+     :width: 30%
+
 
 ::
 
