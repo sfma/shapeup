@@ -79,7 +79,7 @@ In the current version, you need to specify the input intensity file and an esti
 
 Other parameters are optional.  
 
-Here gives an example to illustrate the usage.  
+**Here gives an example to illustrate the usage.**  
 
 The sastbx_path/source/sastbx/examples folder contains some iq profiles and the corresponding pdb data. Change to that directory, then type  
 ``sastbx.shapeup target=2e2g_znk.iq rmax=50``  
@@ -92,8 +92,18 @@ In this example, you can see from the output that:
 
   Best rmax found       :   74.15 A  
 
-With no ntop specified, the output gives ten most similar models by default, and they are ranked by similarity to the target.  
+With no ntop specified, the output gives ten most similar models by default. Pairwise correlation coefficients are calculated and hierarchy clustering is performed with cutoff being 0.80. See this part of the output message:
 
+::
+
+    10 elements,    1 clusters, @cutoff=0.800000
+  ( ( ( ( ( ( ( ( 4 3 ) 5 ) 1 ) ( 7 2 ) ) 8 ) 10 ) 9 ) 6 )
+  mean_value, max_value, min_value, (max_value-min_value)
+  0.929799741509 0.998779418237 0.825467887358 0.173311530879
+
+It says that 10 models are returned and they form only one group.
+
+The returned models are ranked by similarity to the target.  
 
 ::
 
@@ -111,7 +121,9 @@ With no ntop specified, the output gives ten most similar models by default, and
 
 Since no pdb files here, column three lists cc to the first model, pdb_code 2ZCT in this example.
 
-A ccp4 file is generated for each returned model. And the models are averaged to ave_1.ccp4. You can use chimera to view the models. Here gives the images of the top 3 models, from left to right.
+A ccp4 file is generated for each returned model. And models within the same cluster are averaged to a map. You can use `chimera`_ to view the models. Here gives the images of the top 3 models, from left to right.
+
+.. _chimera: https://www.cgl.ucsf.edu/chimera/
 
 .. image:: ./images/image_m1.png 
    :width: 30%
