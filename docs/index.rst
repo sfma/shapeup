@@ -13,7 +13,7 @@ Contents:
 
    installation
    tutorial
-
+   build_db
 
 Indices and tables
 ==================

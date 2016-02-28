@@ -2,6 +2,10 @@
 installation
 ==================
 
+The sastbx software can be downloaded from Haiguang Liu's homepage. Try `here`_.
+
+.. _here: http://www.csrc.ac.cn/~HaiguangLiu/services.html
+
 Installation:
 
 Unpack the compressed file.
