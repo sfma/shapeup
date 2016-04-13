@@ -2,7 +2,7 @@
 build_db
 ===================
 
-An auxiliary program, build_db.py is located in sastbx_path/source/sastbx/zernike folder. As the name suggests, the script is used to build your own database (the default database used in the software is compiled using this script based on 10,733 models chosen from PISA). As most scripts in this folder, run the program without any parameter will give the usage of it. Type ``sastbx.python build_db.py`` in the command line, then:
+An auxiliary program, build_db.py is located in sastbx_path/source/sastbx/zernike_model folder. As the name suggests, the script is used to build your own database (the default database used in the software is compiled using this script based on 10,733 models chosen from PISA). As with most scripts in this folder, run the program without any parameter will give the usage of it. Type ``sastbx.python build_db.py`` in the command line, then:
 
 ::
 
